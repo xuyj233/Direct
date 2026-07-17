@@ -1,14 +1,11 @@
 <div align="center">
 
-# 🎯 DiReCT
-### *Principled sample selection for LLM annealing.*
+# 🎯 DiReCT — *Principled sample selection for LLM annealing.*
 
 [![ICML 2026 Spotlight](https://img.shields.io/badge/ICML%202026-Spotlight-blueviolet?style=for-the-badge&logo=data:image/svg+xml;base64,)](https://icml.cc/)
 [![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
-
-📄 Official code for our ICML 2026 Spotlight paper:
 
 > **Towards Efficient LLMs Annealing with Principled Sample Selection**
 > *ICML 2026 (Spotlight 🏆)*
