@@ -1,9 +1,13 @@
 # DiReCT: Directionally-Restrained Constrained Training
 
+[![ICML 2026 Spotlight](https://img.shields.io/badge/ICML%202026-Spotlight-blueviolet)](https://icml.cc/)
+
+> 🏆 **Accepted as a Spotlight paper at ICML 2026**
+
 Reference implementation of the **sample-selection** module described in
 
 > *Towards Efficient LLMs Annealing with Principled Sample Selection*
-> (ICML 2026)
+> (ICML 2026 Spotlight 🏆)
 
 Given a pre-trained model checkpoint (θ<sub>s</sub>, the state at the onset
 of the annealing phase), a validation set and a candidate training pool,
@@ -44,30 +48,6 @@ indices = select_samples(model, train_samples, val_samples,
 The return value is a `List[int]` of length `K` – the 0-based positions
 into `train_samples` that DiReCT recommends including in the annealing
 schedule.
-
-## Pipeline
-
-The implementation follows Algorithm 1 of the paper:
-
-1. **Gradient sketching** – draw a Gaussian projection
-   `R ∈ ℝ^{k × d}` with entries `N(0, 1/k)` and compute
-   `z_x = R · ∇ℓ(x; θ_s)` for every validation and training sample.
-   `R` is *never* materialised – it is regenerated on the fly in blocks
-   from a deterministic seed (see [`direct/sketch.py`](direct/sketch.py)).
-2. **Sketched Hessian** – form
-   `H̃ = (1/M) Σ_x z_x z_xᵀ` and diagonalise
-   (`torch.linalg.eigh`).
-3. **Spectral elbow** – pick the smallest `k*` capturing
-   `elbow_energy` (default `0.945`) of the total energy and split the
-   spectrum into a stiff subspace `I_⊥` and a flat subspace `I_∥`
-   (see [`direct/spectral.py`](direct/spectral.py)).
-4. **Successive Convex Approximation** – solve the relaxed
-   `max ‖G_∥ w‖²  s.t.  w ∈ [0,1]^N, 1ᵀw = K, aᵀw ≤ τ_⊥`
-   with a projected-gradient-ascent inner loop and **Dykstra**
-   projection onto the three constraints
-   ([`direct/sca.py`](direct/sca.py),
-   [`direct/projection.py`](direct/projection.py)).
-5. **Top-K rounding** – return `argsort(-w*)[:K]`.
 
 ## GPT-2 debug example
 
