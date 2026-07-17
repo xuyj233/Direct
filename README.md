@@ -1,13 +1,25 @@
-# DiReCT: Directionally-Restrained Constrained Training
+<div align="center">
 
-[![ICML 2026 Spotlight](https://img.shields.io/badge/ICML%202026-Spotlight-blueviolet)](https://icml.cc/)
+# 🎯 DiReCT
+### *Directionally-Restrained Constrained Training*
 
-> 🏆 **Accepted as a Spotlight paper at ICML 2026**
+[![ICML 2026 Spotlight](https://img.shields.io/badge/ICML%202026-Spotlight-blueviolet?style=for-the-badge&logo=data:image/svg+xml;base64,)](https://icml.cc/)
+[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 
-Reference implementation of the **sample-selection** module described in
+🏆 **Accepted as a Spotlight paper at ICML 2026** 🏆
 
-> *Towards Efficient LLMs Annealing with Principled Sample Selection*
-> (ICML 2026 Spotlight 🏆)
+*Reference implementation of the **sample-selection** module described in*
+
+> **Towards Efficient LLMs Annealing with Principled Sample Selection**
+> *ICML 2026 (Spotlight 🏆)*
+
+</div>
+
+---
+
+## ✨ Overview
 
 Given a pre-trained model checkpoint (θ<sub>s</sub>, the state at the onset
 of the annealing phase), a validation set and a candidate training pool,
@@ -15,14 +27,27 @@ of the annealing phase), a validation set and a candidate training pool,
 gradients best align with the *flat* eigen-subspace of the validation
 Hessian while respecting a budget on the *stiff* eigen-subspace.
 
-## Installation
+### 🌟 Highlights
+
+- ⚡ **Sketch-based** — Gaussian random projection avoids materialising the full Hessian.
+- 🎯 **Principled selection** — flat / stiff subspace decomposition via spectral elbow.
+- 🧩 **Model-agnostic** — plug in any `nn.Module` and a scalar-loss callable.
+- 🔬 **Reproducible** — deterministic sketching from a single seed.
+
+---
+
+## 📦 Installation
 
 ```bash
 pip install -r requirements.txt
 pip install -e .            # editable install of the `direct` package
 ```
 
-## Quick start
+---
+
+## 🚀 Quick Start
+
+### Minimal example
 
 ```python
 import torch
@@ -45,11 +70,11 @@ indices = select_samples(model, train_samples, val_samples,
                          loss_fn=loss_fn, cfg=cfg)
 ```
 
-The return value is a `List[int]` of length `K` – the 0-based positions
+The return value is a `List[int]` of length `K` — the 0-based positions
 into `train_samples` that DiReCT recommends including in the annealing
 schedule.
 
-## GPT-2 debug example
+### Runnable demo on GPT-2
 
 The [`examples/gpt2_debug.py`](examples/gpt2_debug.py) script exercises
 the entire pipeline on HuggingFace's `gpt2` model. To keep memory usage
@@ -63,7 +88,8 @@ python examples/gpt2_debug.py \
     --num-train 64 --num-val 16 --k 8 --k-sketch 256
 ```
 
-Expected output (abridged):
+<details>
+<summary><b>📋 Expected output (abridged)</b></summary>
 
 ```
 [example] loading model = gpt2
@@ -76,7 +102,26 @@ Expected output (abridged):
 [example] Selected indices: [3, 27, 41, 12, ...]
 ```
 
-## Tests
+</details>
+
+---
+
+## ⚙️ Key Configuration
+
+| Argument | Default | Description |
+| :--- | :---: | :--- |
+| `K` | *required* | Number of training samples to select |
+| `k_sketch` | `2048` | Dimension of the Gaussian sketch |
+| `elbow_energy` | `0.945` | Cumulative-energy threshold for the spectral elbow |
+| `tau_perp` | `0.1` | Relative budget on the stiff-subspace energy |
+| `sca_max_iter` | `20` | Max outer SCA iterations |
+| `inner_iters` | `50` | Inner PGA steps per SCA sub-problem |
+
+See [`direct/config.py`](direct/config.py) for the full `DiReCTConfig` definition.
+
+---
+
+## 🧪 Tests
 
 ```bash
 pytest -v
@@ -85,9 +130,11 @@ pytest -v
 Covers the Dykstra projection, spectral elbow, the Gaussian sketcher,
 plus an end-to-end smoke test on a synthetic MLP.
 
-## Layout
+---
 
-```
+## 📁 Layout
+
+```text
 direct/
 ├── direct/
 │   ├── __init__.py         # public API
@@ -111,7 +158,11 @@ direct/
 └── README.md               # you are here
 ```
 
-## Citation
+---
+
+## 📖 Citation
+
+If you find this work useful, please consider citing:
 
 ```bibtex
 @inproceedings{xu2026direct,
@@ -122,6 +173,14 @@ direct/
 }
 ```
 
-## License
+---
 
-MIT — see [LICENSE](LICENSE).
+## 📄 License
+
+Released under the **MIT License** — see [LICENSE](LICENSE) for details.
+
+<div align="center">
+
+*Made with ❤️ for principled data selection.*
+
+</div>
