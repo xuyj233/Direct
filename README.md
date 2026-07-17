@@ -8,7 +8,9 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 
-*Reference implementation of the **sample-selection** module described in*
+**Pick the right training samples — with a principled twist on the loss landscape.**
+
+📄 Official code for our ICML 2026 Spotlight paper:
 
 > **Towards Efficient LLMs Annealing with Principled Sample Selection**
 > *ICML 2026 (Spotlight 🏆)*
