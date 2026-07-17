@@ -8,7 +8,7 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 
-**Pick the right training samples — with a principled twist on the loss landscape.**
+**Principled sample selection for LLM annealing.**
 
 📄 Official code for our ICML 2026 Spotlight paper:
 
