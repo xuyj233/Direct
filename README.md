@@ -8,8 +8,6 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 
-🏆 **Accepted as a Spotlight paper at ICML 2026** 🏆
-
 *Reference implementation of the **sample-selection** module described in*
 
 > **Towards Efficient LLMs Annealing with Principled Sample Selection**
